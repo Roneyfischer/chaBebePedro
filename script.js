@@ -29,11 +29,18 @@ async function get() {
                 const actionButton = document.createElement('button');
                 actionButton.textContent = 'Selecionar';
                 actionButton.className = 'btn btn-primary';
+                
+                // Verifica se o item já está selecionado
                 actionButton.addEventListener('click', () => {
-                    if (!idsSelecionados.includes(record.id)) {
+                    const index = idsSelecionados.indexOf(record.id);
+                    if (index === -1) {
                         idsSelecionados.push(record.id);
                         actionButton.textContent = 'Selecionado';
                         actionButton.className = 'btn btn-selecionado';
+                    } else {
+                        idsSelecionados.splice(index, 1);
+                        actionButton.textContent = 'Selecionar';
+                        actionButton.className = 'btn btn-primary';
                     }
                 });
                 itemRow.appendChild(actionButton);
