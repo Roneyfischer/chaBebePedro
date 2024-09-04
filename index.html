@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chá de Bebê do Pedro</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f9fc;
+            font-family: 'Arial', sans-serif;
+            margin-top: 80px; /* Espaço para o cabeçalho fixo */
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20vh;
+            background-color: #e9ecef; /* Cor de fundo do cabeçalho */
+            color: #007bff;
+            padding: 15px 0;
+            text-align: center;
+            z-index: 1030; /* Fixa o cabeçalho acima do conteúdo */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para destacar o cabeçalho */
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            
+            margin: 20px auto;
+            margin-top: 25vh;
+        }
+
+        .card {
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 15px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .item-row:last-child {
+            border-bottom: none;
+        }
+
+        .item-text {
+            flex: 1;
+            font-size: 1rem;
+        }
+
+        .btn-selecionado {
+            background-color: #6c757d; /* Cinza escuro */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: not-allowed;
+        }
+
+        .btn-selecionado:hover {
+            background-color: #5a6268; /* Cinza mais escuro */
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Azul */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Azul escuro */
+        }
+
+        .alert-container {
+            position: fixed;
+            top: 40vh; /* Espaço para o cabeçalho fixo */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Chá de Bebê do Pedro</h1>
+    </div>
+
+    <div class="alert-container" id="alert-container"></div>
+
+    <div class="container">
+        <button id="confirmar" class="btn btn-primary btn-lg" style="display: block; margin: 20px auto;">Confrmar presentes selecionados</button>
+
+        <div class="card">
+            <div class="card-header">Itens Disponíveis</div>
+            <div class="card-body" id="data-table">
+                <!-- Os dados serão inseridos aqui -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const idsSelecionados = [];
+
+        async function get() {
+            try {
+                const response = await fetch('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts?maxRecords=10&view=Grid%20view', {
+                    headers: {
+                        'Authorization': 'Bearer patYbYNyN4tNRwfHp.232b7775a91392e82de4038c7f952e46fd604fcda43e80ed514ade111b1ce303'
+                    }
+                });
+                const data = await response.json();
+
+                const dataTable = document.getElementById('data-table');
+                
+                // Limpa o conteúdo da tabela
+                dataTable.innerHTML = '';
+
+                data.records.forEach(record => {
+                    if (record.fields.Selected == 0 && record.fields.Item) {
+                        const itemRow = document.createElement('div');
+                        itemRow.className = 'item-row';
+
+                        // Cria a célula para o Item
+                        const itemText = document.createElement('div');
+                        itemText.className = 'item-text';
+                        itemText.textContent = record.fields.Item;
+                        itemRow.appendChild(itemText);
+
+                        // Cria a célula para o botão Selecionar
+                        const actionButton = document.createElement('button');
+                        actionButton.textContent = 'Selecionar';
+                        actionButton.className = 'btn btn-primary';
+                        actionButton.addEventListener('click', () => {
+                            if (!idsSelecionados.includes(record.id)) {
+                                idsSelecionados.push(record.id);
+                                actionButton.textContent = 'Selecionado';
+                                actionButton.className = 'btn btn-selecionado';
+                            }
+                        });
+                        itemRow.appendChild(actionButton);
+
+                        // Adiciona a linha na tabela
+                        dataTable.appendChild(itemRow);
+                    }
+                });
+
+                // Adiciona a funcionalidade ao botão Confirmar
+                document.getElementById('confirmar').addEventListener('click', async () => {
+                    if (idsSelecionados.length > 0) {
+                        try {
+                            // Cria o corpo da requisição PATCH
+                            const patchBody = {
+                                records: idsSelecionados.map(id => ({
+                                    id: id,
+                                    fields: {
+                                        Selected: "1"
+                                    }
+                                }))
+                            };
+
+                            const patchResponse = await fetch('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts', {
+                                method: 'PATCH',
+                                headers: {
+                                    'Authorization': 'Bearer patYbYNyN4tNRwfHp.232b7775a91392e82de4038c7f952e46fd604fcda43e80ed514ade111b1ce303',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(patchBody)
+                            });
+
+                            if (patchResponse.ok) {
+                                showAlert('Seu(s) presente(s) foram registrados com sucesso!', 'success');
+                                idsSelecionados.length = 0; // Limpa o array de IDs após a atualização
+                                get(); // Atualiza a tabela
+                            } else {
+                                showAlert('Ops, ocorreu um erro. Por favor, marque novamente ou contate o Rôney.', 'danger');
+                            }
+                        } catch (error) {
+                            showAlert('Erro ao tentar realizar a atualização.', 'danger');
+                        }
+                    } else {
+                        showAlert('Nenhum item selecionado.', 'warning');
+                    }
+                });
+                
+            } catch (error) {
+                showAlert('Erro ao tentar buscar os dados.', 'danger');
+            }
+        }
+
+        // Função para mostrar alertas
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alert-container');
+            alertContainer.innerHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show">
+                    ${message}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            `;
+            setTimeout(() => {
+                $('.alert').alert('close');
+            }, 3000);
+        }
+
+        // Chama a função quando a página é carregada
+        window.onload = get;
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
