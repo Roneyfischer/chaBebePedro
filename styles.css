@@ -94,6 +94,7 @@ h1 {
     padding: 10px 20px;
     font-size: 1rem;
     transition: background-color 0.3s ease;
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; /* Adiciona uma sombra */
 }
 
 .btn-primary:hover {
