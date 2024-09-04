@@ -2,7 +2,7 @@ const idsSelecionados = [];
 
 async function get() {
     try {
-        const response = await fetch('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts?maxRecords=10&view=Grid%20view', {
+        const response = await fetch('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts?maxRecords=9000&view=Grid%20view', {
             headers: {
                 'Authorization': 'Bearer patYbYNyN4tNRwfHp.232b7775a91392e82de4038c7f952e46fd604fcda43e80ed514ade111b1ce303'
             }
