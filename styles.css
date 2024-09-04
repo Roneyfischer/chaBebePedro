@@ -31,7 +31,7 @@ h1 {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    margin-top: 10vh; /* Ajusta a margem superior para não colidir com o header */
+    margin-top: 1vh; /* Ajusta a margem superior para não colidir com o header */
 }
 
 .card {
@@ -120,7 +120,7 @@ h1 {
 
 .alert-container {
     position: fixed;
-    top: 20vh; /* Ajusta o alerta para o centro */
+    top: 30vh; /* Ajusta o alerta para o centro */
     left: 50%;
     transform: translateX(-50%);
     z-index: 1050;
