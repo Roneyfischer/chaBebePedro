@@ -114,13 +114,13 @@ h1 {
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra */
+   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; /* Adiciona uma sombra */
 }
 
 #confirmar:hover {
     background-color: #5aa75f; /* Tom mais escuro para hover */
     transform: scale(1.05); /* Aumenta o botão ligeiramente */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao passar o mouse */
+    box-shadow: rgba(0, 0, 0, 0.50) 0px 5px 15px;; /* Aumenta a sombra ao passar o mouse */
 }
 
 .alert-container {
