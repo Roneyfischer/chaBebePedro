@@ -1,7 +1,8 @@
 body {
-    background-color: #f7f9fc;
-    font-family: 'Arial', sans-serif;
-    margin-top: 80px; /* Espaço para o cabeçalho fixo */
+    background-color: #f0f5ee; /* Verde safari clarinho */
+    font-family: 'Poppins', sans-serif; /* Fonte mais suave e arredondada */
+    margin: 0;
+    padding-top: 20vh; /* Espaço para o cabeçalho fixo */
 }
 
 .header {
@@ -10,40 +11,43 @@ body {
     left: 0;
     width: 100%;
     height: 20vh;
-    background-color: #e9ecef; /* Cor de fundo do cabeçalho */
-    color: #007bff;
-    padding: 15px 0;
-    text-align: center;
-    z-index: 1030; /* Fixa o cabeçalho acima do conteúdo */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para destacar o cabeçalho */
+    background-color: #d4e8d0; /* Verde safari clarinho */
+    color: #4a7c59; /* Verde mais escuro para contraste */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1030;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
 }
 
 h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
 }
 
 .container {
-    max-width: 900px;
-    margin: 20px auto;
-    margin-top: 25vh;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 10vh; /* Ajusta a margem superior para não colidir com o header */
 }
 
 .card {
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
     margin-bottom: 20px;
 }
 
 .card-header {
-    background-color: #007bff;
+    background-color: #4a7c59; /* Verde mais escuro */
     color: #ffffff;
     padding: 15px;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
 }
@@ -56,7 +60,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 15px;
     border-bottom: 1px solid #e9ecef;
 }
 
@@ -66,38 +70,60 @@ h1 {
 
 .item-text {
     flex: 1;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 .btn-selecionado {
-    background-color: #6c757d; /* Cinza escuro */
+    background-color: #a8bdb7; /* Verde acinzentado */
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 10px 15px;
+    padding: 10px 20px;
     cursor: not-allowed;
 }
 
 .btn-selecionado:hover {
-    background-color: #5a6268; /* Cinza mais escuro */
+    background-color: #92a3a1; /* Tom mais escuro do verde acinzentado */
 }
 
 .btn-primary {
-    background-color: #007bff; /* Azul */
+    background-color: #4a7c59; /* Verde mais escuro */
     border: none;
     border-radius: 5px;
-    padding: 10px 15px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; /* Azul escuro */
+    background-color: #3a6047; /* Verde ainda mais escuro */
+}
+
+#confirmar {
+    display: block;
+    margin: 40px auto; /* Melhora a posição do botão */
+    padding: 15px 30px; /* Aumenta o tamanho do botão */
+    font-size: 1.2rem;
+    background-color: #6fbf73; /* Verde mais vibrante */
+    border-radius: 10px;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#confirmar:hover {
+    background-color: #5aa75f; /* Tom mais escuro para hover */
 }
 
 .alert-container {
     position: fixed;
-    top: 40vh; /* Espaço para o cabeçalho fixo */
+    top: 30vh; /* Ajusta o alerta para o centro */
     left: 50%;
     transform: translateX(-50%);
     z-index: 1050;
     width: 80%;
 }
+
