@@ -86,3 +86,44 @@ h1 {
 .btn-selecionado:hover {
     background-color: #92a3a1; /* Tom mais escuro do verde acinzentado */
 }
+
+.btn-primary {
+    background-color: #4a7c59; /* Verde mais escuro */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #3a6047; /* Verde ainda mais escuro */
+}
+
+#confirmar {
+    display: block;
+    margin: 40px auto; /* Melhora a posição do botão */
+    padding: 15px 30px; /* Aumenta o tamanho do botão */
+    font-size: 1.2rem;
+    background-color: #6fbf73; /* Verde mais vibrante */
+    border-radius: 10px;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#confirmar:hover {
+    background-color: #5aa75f; /* Tom mais escuro para hover */
+}
+
+.alert-container {
+    position: fixed;
+    top: 30vh; /* Ajusta o alerta para o centro */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    width: 80%;
+}
