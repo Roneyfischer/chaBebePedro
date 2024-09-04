@@ -98,6 +98,7 @@ h1 {
 
 .btn-primary:hover {
     background-color: #3a6047; /* Verde ainda mais escuro */
+      transform: scale(1.05); /* Aumenta o botão ligeiramente */
 }
 
 
