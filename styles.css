@@ -1,77 +1,18 @@
-body {
-    background-color: #f0f5ee; /* Verde safari clarinho */
-    font-family: 'Poppins', sans-serif; /* Fonte mais suave e arredondada */
-    margin: 0;
-    padding-top: 20vh; /* Espaço para o cabeçalho fixo */
-}
 
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 20vh;
-    background-color: #d4e8d0; /* Verde safari clarinho */
-    color: #4a7c59; /* Verde mais escuro para contraste */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1030;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Poppins', sans-serif;
-}
-
-h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    margin-top: 1vh; /* Ajusta a margem superior para não colidir com o header */
-}
-
-.card {
-    border: none;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    margin-bottom: 20px;
-}
-
-.card-header {
+.btn-primary {
     background-color: #4a7c59; /* Verde mais escuro */
-    color: #ffffff;
-    padding: 15px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra */
 }
 
-.card-body {
-    padding: 20px;
-}
-
-.item-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.item-row:last-child {
-    border-bottom: none;
-}
-
-.item-text {
-    flex: 1;
-    font-size: 1.2rem;
+.btn-primary:hover {
+    background-color: #3a6047; /* Verde ainda mais escuro */
+    transform: scale(1.05); /* Aumenta o botão ligeiramente */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao passar o mouse */
 }
 
 .btn-selecionado {
@@ -81,23 +22,13 @@ h1 {
     border-radius: 5px;
     padding: 10px 20px;
     cursor: not-allowed;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra */
+    transition: background-color 0.3s ease, box-shadow 0.2s ease;
 }
 
 .btn-selecionado:hover {
     background-color: #92a3a1; /* Tom mais escuro do verde acinzentado */
-}
-
-.btn-primary {
-    background-color: #4a7c59; /* Verde mais escuro */
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #3a6047; /* Verde ainda mais escuro */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao passar o mouse */
 }
 
 #confirmar {
@@ -112,19 +43,12 @@ h1 {
     font-weight: bold;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra */
 }
 
 #confirmar:hover {
     background-color: #5aa75f; /* Tom mais escuro para hover */
+    transform: scale(1.05); /* Aumenta o botão ligeiramente */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao passar o mouse */
 }
-
-.alert-container {
-    position: fixed;
-    top: 30vh; /* Ajusta o alerta para o centro */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1050;
-    width: 80%;
-}
-
