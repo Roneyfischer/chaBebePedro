@@ -1,0 +1,103 @@
+body {
+    background-color: #f7f9fc;
+    font-family: 'Arial', sans-serif;
+    margin-top: 80px; /* Espaço para o cabeçalho fixo */
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20vh;
+    background-color: #e9ecef; /* Cor de fundo do cabeçalho */
+    color: #007bff;
+    padding: 15px 0;
+    text-align: center;
+    z-index: 1030; /* Fixa o cabeçalho acima do conteúdo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para destacar o cabeçalho */
+}
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    margin-top: 25vh;
+}
+
+.card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 15px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.item-row:last-child {
+    border-bottom: none;
+}
+
+.item-text {
+    flex: 1;
+    font-size: 1rem;
+}
+
+.btn-selecionado {
+    background-color: #6c757d; /* Cinza escuro */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: not-allowed;
+}
+
+.btn-selecionado:hover {
+    background-color: #5a6268; /* Cinza mais escuro */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Azul */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Azul escuro */
+}
+
+.alert-container {
+    position: fixed;
+    top: 40vh; /* Espaço para o cabeçalho fixo */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    width: 80%;
+}
