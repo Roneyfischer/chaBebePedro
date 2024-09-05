@@ -1,12 +1,17 @@
 const idsSelecionadosGifts = [];
 const idsSelecionadosMimos = [];
+var Gifts = [];
 let guestName = '';
 let guestCellphone = '';
 
 // Função para buscar dados das tabelas
 async function get() {
-    await fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts?view=Grid%20view', 'data-table-gifts', idsSelecionadosGifts);
-    await fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos?view=Grid%20view', 'data-table-mimos', idsSelecionadosMimos);
+    try {
+        await fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts?view=Grid%20view', 'data-table-gifts', idsSelecionadosGifts);
+        await fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos?view=Grid%20view', 'data-table-mimos', idsSelecionadosMimos);
+    } catch (error) {
+        showAlert(`Erro ao carregar dados: ${error.message}`, 'danger');
+    }
 }
 
 // Função para buscar dados da API
@@ -45,6 +50,7 @@ async function fetchData(url, tableId, idsSelecionados) {
                 const itemText = document.createElement('h5');
                 itemText.textContent = record.fields.Item;
                 gridItem.appendChild(itemText);
+                
 
                 // Cria o botão de ação
                 const actionButton = document.createElement('button');
@@ -154,6 +160,8 @@ $(document).ready(function () {
         backdrop: 'static', // Impede fechar o modal ao clicar fora
         keyboard: false // Impede fechar o modal com a tecla ESC
     });
+
+
 });
 
 // Validação de campos do formulário de confirmação
@@ -186,63 +194,98 @@ document.getElementById('btnProximo').addEventListener('click', () => {
 
 // Finalizar processo de seleção
 document.getElementById('btnFinalizar').addEventListener('click', async () => {
+    // Exibe a modal de progresso
+    $('#progressModal').modal('show');
+
     // Captura os valores dos campos nome e celular
     const nome = document.getElementById('nome').value.trim();
     const celular = document.getElementById('celular').value.trim();
     const acompanhantes = document.getElementById('acompanhantes').value.trim();
 
     if (nome && celular) {
-        $('#confirmacaoModal').modal('hide'); // Fecha o modal
-        showAlert('Obrigado por confirmar sua presença e escolher o(s) presente(s)!', 'success');
+        // Fecha o modal de confirmação
+        $('#confirmacaoModal').modal('hide');
 
-        // Envia os presentes selecionados
-        if (idsSelecionadosGifts.length > 0 || idsSelecionadosMimos.length > 0) {
-            try {
-                const patchBodyGifts = idsSelecionadosGifts.length > 0 ? {
-                    records: idsSelecionadosGifts.map(id => ({
-                        id: id,
-                        fields: { Selected: "1", Guest: nome, Cellphone: celular }
-                    }))
-                } : null;
+        try {
+            // Envia os presentes selecionados
+            const patchBodyGifts = idsSelecionadosGifts.length > 0 ? {
+                records: idsSelecionadosGifts.map(id => ({
+                    id: id,
+                    fields: { Selected: "1", Guest: nome, Cellphone: celular }
+                }))
+            } : null;
+            Gifts = patchBodyGifts;
+            const patchBodyMimos = idsSelecionadosMimos.length > 0 ? {
+                records: idsSelecionadosMimos.map(id => ({
+                    id: id,
+                    fields: { Selected: "1", Guest: nome, Cellphone: celular }
+                }))
+            } : null;
 
-                const patchBodyMimos = idsSelecionadosMimos.length > 0 ? {
-                    records: idsSelecionadosMimos.map(id => ({
-                        id: id,
-                        fields: { Selected: "1", Guest: nome, Cellphone: celular }
-                    }))
-                } : null;
-
-                if (patchBodyGifts) {
-                    await patchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts', patchBodyGifts);
-                }
-
-                if (patchBodyMimos) {
-                    await patchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos', patchBodyMimos);
-                }
-
-                // Envia dados do convidado
-                const postBodyGuest = {
-                    fields: {
-                        Guest: nome,
-                        Cellphone: celular,
-                        Guests: acompanhantes
-                    }
-                };
-
-                await postGuestData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/guests', postBodyGuest);
-
-                showAlert('Seu(s) presente(s) foram registrados com sucesso!', 'success');
-                idsSelecionadosGifts.length = 0;
-                idsSelecionadosMimos.length = 0;
-                get(); // Atualiza ambas as tabelas
-            } catch (error) {
-                showAlert('Ops, ocorreu um erro. Por favor, marque novamente ou contate o Rôney.', 'danger');
+            if (patchBodyGifts) {
+                await patchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts', patchBodyGifts);
             }
-        } else {
-            showAlert('Nenhum item selecionado.', 'warning');
+
+            if (patchBodyMimos) {
+                await patchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos', patchBodyMimos);
+            }
+
+            // Envia os dados do convidado
+            await postGuestData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/guests', {
+                fields: { Guest: nome, Cellphone: celular, Guests: acompanhantes }
+            });
+
+            // Exibe mensagem de sucesso
+            showAlert('Dados enviados com sucesso!', 'success');
+            
+            // Exibe a modal de opções para WhatsApp após sucesso
+            $('#optionsModal').modal('show');
+        } catch (error) {
+            // Exibe mensagem de erro
+            showAlert(`Erro ao enviar dados: ${error.message}`, 'danger');
+        } finally {
+            // Fecha a modal de progresso
+            $('#progressModal').modal('hide');
         }
     } else {
-        showAlert('Por favor, preencha todos os campos antes de confirmar.', 'warning');
+        showAlert('Preencha todos os campos obrigatórios.', 'danger');
     }
 });
 
+/// Função para gerar a URL do WhatsApp
+function generateWhatsAppMessage(nome, celular, idsGifts, idsMimos, idsSelecionadosGifts) {
+    const baseURL = 'https://wa.me/';
+    const message = encodeURIComponent(
+        `Olá! Meu nome é ${idsSelecionadosGifts}` 
+    );
+    return `${baseURL}${celular}?text=${message}`;
+}
+
+// Função para exibir a pop-up do WhatsApp
+function showWhatsAppPopup(nome, celular, idsGifts, idsMimos, idsSelecionadosGifts) {
+    const messageURL = generateWhatsAppMessage(nome, celular, idsGifts, idsMimos, idsSelecionadosGifts);
+    window.open(messageURL, '_blank');
+}
+
+// Atualiza o evento de clique no botão "Enviar dados no WhatsApp"
+document.getElementById('btnSendWhatsApp').addEventListener('click', async () => {
+    // Fecha a modal de opções
+    console.log(Gifts);
+    giftName  =Gifts[0].n
+    $('#optionsModal').modal('hide');
+
+    // Captura os valores dos campos nome e celular
+    const nome = document.getElementById('nome').value.trim();
+    const celular = document.getElementById('celular').value.trim();
+
+    if (nome && celular) {
+        // Exibe a pop-up para enviar a mensagem no WhatsApp
+        showWhatsAppPopup(nome, celular, idsSelecionadosGifts, Gifts);
+    } else {
+        showAlert('Preencha todos os campos obrigatórios.', 'danger');
+    }
+});
+
+
+// Inicializa os dados quando a página carrega
+get();
