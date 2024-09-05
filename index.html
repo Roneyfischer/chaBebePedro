@@ -1,176 +1,77 @@
-/* Layout geral do corpo */
-body {
-    background-color: #f0f5ee;
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding-top: 20vh;
-}
-
-/* Cabeçalho fixo */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 20vh;
-    background-color: #d4e8d0;
-    color: #4a7c59;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1030;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* Container centralizado */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    margin-top: 1vh;
-}
-
-/* Grid para desktop */
-.row {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px; /* Espaço entre colunas */
-}
-
-/* Colunas com 50% de largura no desktop */
-.col-md-6 {
-    flex: 1;
-}
-
-/* Grade para itens */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta o tamanho dos itens */
-    gap: 15px; /* Espaçamento entre itens */
-    padding: 20px 0;
-}
-/* Itens da grade */
-.grid-item {
-    background-color: #ffffff; /* Cor de fundo branca */
-    border: 1px solid #ddd; /* Borda leve para separar os itens */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para destaque */
-    padding: 15px; /* Aumenta o espaçamento interno */
-    text-align: center;
-    transition: transform 0.3s ease;
-    font-size: 0.9rem; /* Texto um pouco menor */
-    border-radius: 8px; /* Bordas arredondadas */
-}
-
-/* Ajuste para a imagem dos itens */
-.grid-item img {
-    width: 100%; /* Faz a imagem preencher a largura do item */
-    height: auto; /* Mantém a proporção da imagem */
-    max-height: 150px; /* Define uma altura máxima para as imagens */
-    object-fit: cover; /* Cobre o contêiner mantendo a proporção */
-    border-radius: 8px; /* Bordas arredondadas nas imagens */
-    margin-bottom: 10px; /* Espaçamento abaixo da imagem */
-}
-
-
-.grid-item:hover {
-    transform: scale(1.05); /* Efeito ao passar o mouse */
-}
-
-.grid-item h5 {
-    font-size: 1rem;
-    color: #4a7c59;
-    margin-bottom: 10px;
-}
-
-/* Botão de ação */
-.btn-primary, .btn-selecionado {
-    padding: 8px 15px; /* Botões menores */
-    font-size: 0.9rem;
-    border-radius: 5px;
-    margin-top: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-/* Botão de "Selecionar" */
-.btn-primary {
-    background-color: #4a7c59;
-    color: white;
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #3a6047;
-    transform: scale(1.05);
-}
-
-/* Botão de "Selecionado" */
-.btn-selecionado {
-    background-color: #a8bdb7;
-    color: white;
-    cursor: not-allowed;
-}
-
-.btn-selecionado:hover {
-    background-color: #92a3a1;
-}
-
-/* Botão confirmar */
-#confirmar {
-    display: block;
-    margin: 40px auto;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    background-color: #6fbf73;
-    border-radius: 10px;
-    border: none;
-    color: #ffffff;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-#confirmar:hover {
-    background-color: #5aa75f;
-    transform: scale(1.05);
-    box-shadow: rgba(0, 0, 0, 0.50) 0px 5px 15px;
-}
-
-/* Alerta centralizado */
-.alert-container {
-    position: fixed;
-    top: 30vh;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1050;
-    width: 80%;
-}
-
-/* Responsividade para celular - Exibe as colunas lado a lado */
-@media (max-width: 768px) {
-    .row {
-        display: flex;
-        flex-direction: row;
-        gap: 10px; /* Espaçamento entre colunas */
-    }
-
-    .col-md-6 {
-        flex: 1;
-        min-width: 0; /* Garante que as colunas possam encolher */
-    }
-
-    .grid-container {
-        display: grid;
-        grid-template-columns: 1fr; /* Apenas uma coluna de itens */
-        gap: 10px; /* Menor espaçamento entre itens */
-    }
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chá de Fraldas do Pedro</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet"> <!-- Link para o CSS externo -->
     
-}
+        <!-- Favicon -->
+        <link rel="icon" href="./favicon.ico" type="image/x-icon">
+        
+        <!-- Metatags Open Graph -->
+        <meta property="og:title" content="Chá de Fraldas do Pedro">
+        <meta property="og:description" content="Participe do Chá de Fraldas do Pedro e traga seu carinho e presentes para o nosso pequeno.">
+        <meta property="og:image" content="./cooverImg.jpg">
+        <meta property="og:url" content="https://chadopedro.vercel.app/">
+        <meta property="og:type" content="website">
+    
+        <!-- Metatags Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Chá de Fraldas do Pedro">
+        <meta name="twitter:description" content="Participe do Chá de Fraldas do Pedro e traga seu carinho e presentes para o nosso pequeno.">
+        <meta name="twitter:image" content="./cooverImg.jpg">
+        <meta name="twitter:url" content="https://chadopedro.vercel.app/">
+    
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+    
+
+
+
+
+
+
+
+<body>
+
+    <div class="header">
+        <h1>Chá de Fraldas do Pedro</h1>
+    </div>
+
+    <div class="alert-container" id="alert-container"></div>
+
+    <div class="container">
+        <button id="confirmar" class="btn btn-primary btn-lg">Confirmar presentes</button>
+    
+        <div class="row">
+            <!-- Coluna de Gifts -->
+            <div class="col-md-6">
+                <h3 class="text-center">Gifts</h3>
+                <div class="grid-container" id="data-table-gifts">
+                    <!-- Itens de gifts serão inseridos aqui -->
+                </div>
+            </div>
+    
+            <!-- Coluna de Mimos -->
+            <div class="col-md-6">
+                <h3 class="text-center">Mimos</h3>
+                <div class="grid-container" id="data-table-mimos">
+                    <!-- Itens de mimos serão inseridos aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+
+
+    <script src="script.js"></script> <!-- Link para o JavaScript externo -->
+
+</body>
+</html>
