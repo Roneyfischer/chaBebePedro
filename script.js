@@ -42,11 +42,10 @@ async function fetchData(url, tableId, idsSelecionados) {
                 itemText.textContent = record.fields.Item;
                 gridItem.appendChild(itemText);
 
-                // Cria o botão de ação com o atributo data-id
+                // Cria o botão de ação
                 const actionButton = document.createElement('button');
                 actionButton.textContent = 'Selecionar';
                 actionButton.className = 'btn btn-primary';
-                actionButton.setAttribute('data-id', record.id); // Adiciona o atributo data-id com o valor do ID
 
                 // Verifica se o item já está selecionado
                 actionButton.addEventListener('click', () => {
@@ -80,76 +79,42 @@ async function fetchData(url, tableId, idsSelecionados) {
 
 
 
-
-document.getElementById('confirmar').addEventListener('click', () => {
-    // Verificar se há itens selecionados
+document.getElementById('confirmar').addEventListener('click', async () => {
     if (idsSelecionadosGifts.length > 0 || idsSelecionadosMimos.length > 0) {
-        // Limpa a lista de itens selecionados no modal
-        const itensSelecionadosList = document.getElementById('itens-selecionados-list');
-        itensSelecionadosList.innerHTML = '';
+        try {
+            const patchBodyGifts = idsSelecionadosGifts.length > 0 ? {
+                records: idsSelecionadosGifts.map(id => ({
+                    id: id,
+                    fields: { Selected: "1" }
+                }))
+            } : null;
 
-        // Adiciona os itens de "Gifts" selecionados
-        idsSelecionadosGifts.forEach(id => {
-            const giftItem = document.querySelector(`#data-table-gifts .grid-item button[data-id="${id}"]`).parentElement.querySelector('h5').textContent;
-            const listItem = document.createElement('li');
-            listItem.className = 'list-group-item';
-            listItem.textContent = giftItem;
-            itensSelecionadosList.appendChild(listItem);
-        });
+            const patchBodyMimos = idsSelecionadosMimos.length > 0 ? {
+                records: idsSelecionadosMimos.map(id => ({
+                    id: id,
+                    fields: { Selected: "1" }
+                }))
+            } : null;
 
-        // Adiciona os itens de "Mimos" selecionados
-        idsSelecionadosMimos.forEach(id => {
-            const mimoItem = document.querySelector(`#data-table-mimos .grid-item button[data-id="${id}"]`).parentElement.querySelector('h5').textContent;
-            const listItem = document.createElement('li');
-            listItem.className = 'list-group-item';
-            listItem.textContent = mimoItem;
-            itensSelecionadosList.appendChild(listItem);
-        });
+            if (patchBodyGifts) {
+                await patchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts', patchBodyGifts);
+            }
 
-        // Exibe o modal
-        $('#confirmModal').modal('show');
+            if (patchBodyMimos) {
+                await patchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos', patchBodyMimos);
+            }
+
+            showAlert('Seu(s) presente(s) foram registrados com sucesso!', 'success');
+            idsSelecionadosGifts.length = 0;
+            idsSelecionadosMimos.length = 0;
+            get(); // Atualiza ambas as tabelas
+        } catch (error) {
+            showAlert('Ops, ocorreu um erro. Por favor, marque novamente ou contate o Rôney.', 'danger');
+        }
     } else {
         showAlert('Nenhum item selecionado.', 'warning');
     }
 });
-
-// Ao clicar em "Confirmar" dentro do modal
-document.getElementById('finalizarConfirmacao').addEventListener('click', async () => {
-    try {
-        const patchBodyGifts = idsSelecionadosGifts.length > 0 ? {
-            records: idsSelecionadosGifts.map(id => ({
-                id: id,
-                fields: { Selected: "1" }
-            }))
-        } : null;
-
-        const patchBodyMimos = idsSelecionadosMimos.length > 0 ? {
-            records: idsSelecionadosMimos.map(id => ({
-                id: id,
-                fields: { Selected: "1" }
-            }))
-        } : null;
-
-        if (patchBodyGifts) {
-            await patchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts', patchBodyGifts);
-        }
-
-        if (patchBodyMimos) {
-            await patchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos', patchBodyMimos);
-        }
-
-        showAlert('Seu(s) presente(s) foram registrados com sucesso!', 'success');
-        idsSelecionadosGifts.length = 0;
-        idsSelecionadosMimos.length = 0;
-        get(); // Atualiza ambas as tabelas
-
-        // Fechar o modal
-        $('#confirmModal').modal('hide');
-    } catch (error) {
-        showAlert('Ops, ocorreu um erro. Por favor, tente novamente.', 'danger');
-    }
-});
-
 
 async function patchData(url, patchBody) {
     const response = await fetch(url, {
