@@ -27,6 +27,9 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
     </head>
     
 
@@ -39,39 +42,103 @@
 <body>
 
     <div class="header">
-        <h1>Chá de Fraldas do Pedro</h1>
+        <h1>Chá de Fraldas do Pedro!</h1>
         
     </div>
 
     <div class="alert-container" id="alert-container"></div>
 
-    <h3>Sugestões de presentes</h3>
-
-    <div class="container">
-        <button id="confirmar" class="btn btn-primary btn-lg">Confirmar presentes</button>
-    
-        <div class="row">
-            <!-- Coluna de Gifts -->
-            <div class="col-md-6">
-                <h3 class="text-center">Fraldas</h3>
-                <div class="grid-container" id="data-table-gifts">
-                    <!-- Itens de gifts serão inseridos aqui -->
+<!-- Modal de Confirmação de Presença -->
+<div class="modal fade" id="confirmacaoModal" tabindex="-1" role="dialog" aria-labelledby="confirmacaoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmacaoModalLabel">Confirmação de Presença</h5>
+                <!-- Botão de fechar removido via CSS -->
+            </div>
+            <div class="modal-body">
+                <!-- Conteúdo da modal -->
+                <div id="step1">
+                    <form id="formConfirmacao">
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" class="form-control" id="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="celular">Celular</label>
+                            <input type="tel" class="form-control" id="celular" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="acompanhantes">Número de Acompanhantes (0-10)</label>
+                            <input type="number" class="form-control" id="acompanhantes" min="0" max="10" required>
+                        </div>
+                    </form>
+                </div>
+                <!-- Seleção de presentes e mimos -->
+                <div id="step2" style="display: none;">
+                    <h5 class="text-center">Escolha seu presente</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="text-center">Fraldas</h5>
+                            <div class="grid-container" id="modal-table-gifts">
+                                <!-- Itens de gifts serão inseridos aqui -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="text-center">Mimos</h5>
+                            <div class="grid-container" id="modal-table-mimos">
+                                <!-- Itens de mimos serão inseridos aqui -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-    
-            <!-- Coluna de Mimos -->
-            <div class="col-md-6">
-                <h3 class="text-center">Mimos</h3>
-                <div class="grid-container" id="data-table-mimos">
-                    <!-- Itens de mimos serão inseridos aqui -->
+            <div class="modal-footer">
+                <!-- Botão Próximo na primeira parte -->
+                <button type="button" id="btnProximo" class="btn btn-primary" disabled>Próximo</button>
+                <!-- Botão Finalizar na segunda parte -->
+                <button type="button" id="btnFinalizar" class="btn btn-success" style="display: none;">Confirmar presença e presentes selecionados</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Progresso -->
+<div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="progressModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h5>Salvando, aguarde...</h5>
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
                 </div>
             </div>
         </div>
     </div>
-    
-    
-    
-    
+</div>
+
+<!-- Modal de Opções -->
+<div class="modal fade" id="optionsModal" tabindex="-1" role="dialog" aria-labelledby="optionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="optionsModalLabel">Escolha uma opção</h5>
+            </div>
+            <div class="modal-body text-center">
+                <button type="button" id="btnSavePDF" class="btn btn-primary">Salvar dados em PDF</button>
+                <button type="button" id="btnSendWhatsApp" class="btn btn-success">Enviar dados no WhatsApp</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  
+
+    <h3>Sugestões de presentes</h3>
+
+  
 
 
     <script src="script.js"></script> <!-- Link para o JavaScript externo -->
