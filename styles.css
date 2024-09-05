@@ -56,21 +56,21 @@ h1 {
     gap: 15px; /* Espaçamento entre itens */
     padding: 20px 0;
 }
-
 /* Itens da grade */
 .grid-item {
-    background-color: transparent; /* Remove o fundo dos itens */
-    border: none; /* Remove a borda dos itens */
-    box-shadow: none; /* Remove a sombra */
-    padding: 10px;
+    background-color: #ffffff; /* Cor de fundo branca */
+    border: 1px solid #ddd; /* Borda leve para separar os itens */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para destaque */
+    padding: 15px; /* Aumenta o espaçamento interno */
     text-align: center;
     transition: transform 0.3s ease;
     font-size: 0.9rem; /* Texto um pouco menor */
+    border-radius: 8px; /* Bordas arredondadas */
 }
 
-/* Imagens dos itens */
+/* Ajuste para a imagem dos itens */
 .grid-item img {
-    width: 60%; /* Ajusta a largura da imagem para preencher o item */
+    width: 100%; /* Faz a imagem preencher a largura do item */
     height: auto; /* Mantém a proporção da imagem */
     max-height: 150px; /* Define uma altura máxima para as imagens */
     object-fit: cover; /* Cobre o contêiner mantendo a proporção */
