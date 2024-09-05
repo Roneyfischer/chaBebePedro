@@ -1,6 +1,7 @@
 const idsSelecionadosGifts = [];
 const idsSelecionadosMimos = [];
 var Gifts = [];
+var Mimos = [];  // Adicionando a variável Mimos
 let guestName = '';
 let guestCellphone = '';
 
