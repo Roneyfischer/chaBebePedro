@@ -20,6 +20,7 @@ body {
     justify-content: center;
     z-index: 1030;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0;
 }
 
 h1 {
@@ -28,13 +29,23 @@ h1 {
     font-weight: bold;
     text-align: center;
 }
+h3{
+
+    margin: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0;
+
+}
 
 /* Container centralizado */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    margin-top: 1vh;
+    padding-top: 0;
+    margin-top: 0rem;
 }
 
 /* Grid para desktop */
