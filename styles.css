@@ -161,7 +161,7 @@ h3{
     top: 30vh;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1050;
+    z-index: 105000;
     width: 80%;
 }
 
