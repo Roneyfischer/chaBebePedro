@@ -1,24 +1,25 @@
+/* Layout geral do corpo */
 body {
-    background-color: #f0f5ee; /* Verde safari clarinho */
-    font-family: 'Poppins', sans-serif; /* Fonte mais suave e arredondada */
+    background-color: #f0f5ee;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
-    padding-top: 20vh; /* Espaço para o cabeçalho fixo */
+    padding-top: 20vh;
 }
 
+/* Cabeçalho fixo */
 .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 20vh;
-    background-color: #d4e8d0; /* Verde safari clarinho */
-    color: #4a7c59; /* Verde mais escuro para contraste */
+    background-color: #d4e8d0;
+    color: #4a7c59;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1030;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Poppins', sans-serif;
 }
 
 h1 {
@@ -28,87 +29,105 @@ h1 {
     text-align: center;
 }
 
+/* Container centralizado */
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    margin-top: 1vh; /* Ajusta a margem superior para não colidir com o header */
+    margin-top: 1vh;
 }
 
-.card {
-    border: none;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    margin-bottom: 20px;
-}
-
-.card-header {
-    background-color: #4a7c59; /* Verde mais escuro */
-    color: #ffffff;
-    padding: 15px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-}
-
-.card-body {
-    padding: 20px;
-}
-
-.item-row {
+/* Grid para desktop */
+.row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    border-bottom: 1px solid #e9ecef;
+    gap: 20px; /* Espaço entre colunas */
 }
 
-.item-row:last-child {
-    border-bottom: none;
-}
-
-.item-text {
+/* Colunas com 50% de largura no desktop */
+.col-md-6 {
     flex: 1;
-    font-size: 1.2rem;
 }
 
-.btn-selecionado {
-    background-color: #a8bdb7; /* Verde acinzentado */
+/* Grade para itens */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta o tamanho dos itens */
+    gap: 15px; /* Espaçamento entre itens */
+    padding: 20px 0;
+}
+
+/* Itens da grade */
+.grid-item {
+    background-color: transparent; /* Remove o fundo dos itens */
+    border: none; /* Remove a borda dos itens */
+    box-shadow: none; /* Remove a sombra */
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    font-size: 0.9rem; /* Texto um pouco menor */
+}
+
+/* Imagens dos itens */
+.grid-item img {
+    width: 60%; /* Ajusta a largura da imagem para preencher o item */
+    height: auto; /* Mantém a proporção da imagem */
+    max-height: 150px; /* Define uma altura máxima para as imagens */
+    object-fit: cover; /* Cobre o contêiner mantendo a proporção */
+    border-radius: 8px; /* Bordas arredondadas nas imagens */
+    margin-bottom: 10px; /* Espaçamento abaixo da imagem */
+}
+
+
+.grid-item:hover {
+    transform: scale(1.05); /* Efeito ao passar o mouse */
+}
+
+.grid-item h5 {
+    font-size: 1rem;
+    color: #4a7c59;
+    margin-bottom: 10px;
+}
+
+/* Botão de ação */
+.btn-primary, .btn-selecionado {
+    padding: 8px 15px; /* Botões menores */
+    font-size: 0.9rem;
+    border-radius: 5px;
+    margin-top: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Botão de "Selecionar" */
+.btn-primary {
+    background-color: #4a7c59;
     color: white;
     border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
+}
+
+.btn-primary:hover {
+    background-color: #3a6047;
+    transform: scale(1.05);
+}
+
+/* Botão de "Selecionado" */
+.btn-selecionado {
+    background-color: #a8bdb7;
+    color: white;
     cursor: not-allowed;
 }
 
 .btn-selecionado:hover {
-    background-color: #92a3a1; /* Tom mais escuro do verde acinzentado */
+    background-color: #92a3a1;
 }
 
-.btn-primary {
-    background-color: #4a7c59; /* Verde mais escuro */
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; /* Adiciona uma sombra */
-}
-
-.btn-primary:hover {
-    background-color: #3a6047; /* Verde ainda mais escuro */
-      transform: scale(1.05); /* Aumenta o botão ligeiramente */
-}
-
-
+/* Botão confirmar */
 #confirmar {
     display: block;
-    margin: 40px auto; /* Melhora a posição do botão */
-    padding: 15px 30px; /* Aumenta o tamanho do botão */
+    margin: 40px auto;
+    padding: 15px 30px;
     font-size: 1.2rem;
-    background-color: #6fbf73; /* Verde mais vibrante */
+    background-color: #6fbf73;
     border-radius: 10px;
     border: none;
     color: #ffffff;
@@ -116,20 +135,42 @@ h1 {
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; /* Adiciona uma sombra */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 #confirmar:hover {
-    background-color: #5aa75f; /* Tom mais escuro para hover */
-    transform: scale(1.05); /* Aumenta o botão ligeiramente */
-    box-shadow: rgba(0, 0, 0, 0.50) 0px 5px 15px;; /* Aumenta a sombra ao passar o mouse */
+    background-color: #5aa75f;
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.50) 0px 5px 15px;
 }
 
+/* Alerta centralizado */
 .alert-container {
     position: fixed;
-    top: 30vh; /* Ajusta o alerta para o centro */
+    top: 30vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1050;
     width: 80%;
+}
+
+/* Responsividade para celular - Exibe as colunas lado a lado */
+@media (max-width: 768px) {
+    .row {
+        display: flex;
+        flex-direction: row;
+        gap: 10px; /* Espaçamento entre colunas */
+    }
+
+    .col-md-6 {
+        flex: 1;
+        min-width: 0; /* Garante que as colunas possam encolher */
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr; /* Apenas uma coluna de itens */
+        gap: 10px; /* Menor espaçamento entre itens */
+    }
+    
 }
