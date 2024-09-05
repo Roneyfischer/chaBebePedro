@@ -240,7 +240,7 @@ document.getElementById('btnFinalizar').addEventListener('click', async () => {
                     Guest: nome, 
                     Cellphone: celular, 
                     Guests: acompanhantes, 
-                    AllGifts: allSelectedItems // Incluindo os itens selecionados
+                    AllGifts: "allSelectedItems" // Incluindo os itens selecionados
                 }
             });
 
