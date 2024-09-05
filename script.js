@@ -260,3 +260,25 @@ document.getElementById('btnFinalizar').addEventListener('click', async () => {
         }
     }
 });
+
+
+// Função que verifica se todos os campos estão preenchidos
+function checkFormValidity() {
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const celular = document.getElementById('celular').value.trim();
+    const acompanhantes = document.getElementById('acompanhantes').value.trim();
+
+    // Verifica se todos os campos estão preenchidos
+    if (nome && email && celular && acompanhantes) {
+        document.getElementById('btnProximo').disabled = false; // Habilita o botão
+    } else {
+        document.getElementById('btnProximo').disabled = true; // Desabilita o botão
+    }
+}
+
+// Adiciona um listener para todos os inputs e select
+document.getElementById('nome').addEventListener('input', checkFormValidity);
+document.getElementById('email').addEventListener('input', checkFormValidity);
+document.getElementById('celular').addEventListener('input', checkFormValidity);
+document.getElementById('acompanhantes').addEventListener('input', checkFormValidity);
