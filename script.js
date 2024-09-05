@@ -83,7 +83,7 @@ async function fetchData(url, tableId, idsSelecionados) {
         dataTable.appendChild(gridContainer);
 
     } catch (error) {
-        showAlert('Erro ao tentar buscar os dados.', 'danger');
+        showAlert('Erro ao tentar buscar os dados 2.', 'danger');
     }
 }
 
@@ -285,7 +285,3 @@ document.getElementById('btnSendWhatsApp').addEventListener('click', async () =>
         showAlert('Preencha todos os campos obrigatórios.', 'danger');
     }
 });
-
-
-// Inicializa os dados quando a página carrega
-get();
