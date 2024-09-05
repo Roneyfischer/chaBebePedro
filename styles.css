@@ -165,6 +165,57 @@ h3{
     width: 80%;
 }
 
+/* Modal geral */
+.modal-dialog {
+    max-width: 800px; /* Define a largura máxima da modal */
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 80vh; /* Altura total da modal */
+}
+
+.modal-header,
+.modal-footer {
+    background-color: #d4e8d0; /* Cor de fundo para o header e footer */
+    color: #4a7c59; /* Cor do texto para o header e footer */
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.modal-body {
+    flex: 1;
+    overflow-y: auto; /* Adiciona scroll interno se necessário */
+}
+
+.modal-footer {
+    border-top: none;
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões à direita */
+}
+
+/* Remove o botão de fechar da modal */
+.modal .close {
+    display: none;
+}
+
+/* Botão desabilitado */
+#btnProximo:disabled {
+    background-color: #a8bdb7;
+    cursor: not-allowed;
+}
+
+
+
+
+
 /* Responsividade para celular - Exibe as colunas lado a lado */
 @media (max-width: 768px) {
     .row {
