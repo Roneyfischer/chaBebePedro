@@ -223,9 +223,9 @@ document.getElementById('btnFinalizar').addEventListener('click', async () => {
             // Envia os dados do convidado com os presentes e mimos selecionados
             const postBody = {
                 fields: {
-                    Nome: nome,
-                    Celular: celular,
-                    Acompanhantes: acompanhantes,
+                    Guest: nome,
+                    Cellphone: celular,
+                    Guests: acompanhantes,
                     AllGifts: allSelectedItems.join(', ')
                 }
             };
