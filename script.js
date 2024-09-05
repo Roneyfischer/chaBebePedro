@@ -50,7 +50,6 @@ async function fetchData(url, tableId, idsSelecionados) {
                 const itemText = document.createElement('h5');
                 itemText.textContent = record.fields.Item;
                 gridItem.appendChild(itemText);
-                
 
                 // Cria o botão de ação
                 const actionButton = document.createElement('button');
@@ -83,7 +82,7 @@ async function fetchData(url, tableId, idsSelecionados) {
         dataTable.appendChild(gridContainer);
 
     } catch (error) {
-        showAlert('Erro ao tentar buscar os dados 2.', 'danger');
+        showAlert('Erro ao tentar buscar os dados.', 'danger');
     }
 }
 
@@ -113,7 +112,7 @@ async function patchData(url, patchBody) {
     }
 }
 
-// Função para enviar dados com POST
+// Função para enviar dados com POST, incluindo o campo AllGifts
 async function postGuestData(url, postBody) {
     console.log('Enviando dados para:', url);
     console.log('Corpo da requisição:', JSON.stringify(postBody, null, 2));
@@ -160,8 +159,6 @@ $(document).ready(function () {
         backdrop: 'static', // Impede fechar o modal ao clicar fora
         keyboard: false // Impede fechar o modal com a tecla ESC
     });
-
-
 });
 
 // Validação de campos do formulário de confirmação
@@ -230,9 +227,20 @@ document.getElementById('btnFinalizar').addEventListener('click', async () => {
                 await patchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos', patchBodyMimos);
             }
 
-            // Envia os dados do convidado
+            // Monta o campo "AllGifts" com o nome dos presentes e mimos selecionados
+            const allSelectedItems = [
+                ...idsSelecionadosGifts.map(id => Gifts.records.find(g => g.id === id)?.fields.Item || ''),
+                ...idsSelecionadosMimos.map(id => Mimos.records.find(m => m.id === id)?.fields.Item || '')
+            ].filter(item => item).join(', ');
+
+            // Envia os dados do convidado com "AllGifts"
             await postGuestData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/guests', {
-                fields: { Guest: nome, Cellphone: celular, Guests: acompanhantes }
+                fields: { 
+                    Guest: nome, 
+                    Cellphone: celular, 
+                    Guests: acompanhantes, 
+                    AllGifts: allSelectedItems // Incluindo os itens selecionados
+                }
             });
 
             // Exibe mensagem de sucesso
@@ -271,7 +279,7 @@ function showWhatsAppPopup(nome, celular, idsGifts, idsMimos, idsSelecionadosGif
 document.getElementById('btnSendWhatsApp').addEventListener('click', async () => {
     // Fecha a modal de opções
     console.log(Gifts);
-    giftName  =Gifts[0].n
+    giftName  = Gifts[0].n;
     $('#optionsModal').modal('hide');
 
     // Captura os valores dos campos nome e celular
