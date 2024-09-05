@@ -206,6 +206,7 @@ document.getElementById('btnFinalizar').addEventListener('click', async () => {
     // Captura os valores dos campos nome e celular
     const nome = document.getElementById('nome').value.trim();
     const celular = document.getElementById('celular').value.trim();
+    const email = document.getElementById('email').value.trim();
     const acompanhantes = document.getElementById('acompanhantes').value.trim();
 
     if (nome && celular) {
@@ -226,6 +227,7 @@ document.getElementById('btnFinalizar').addEventListener('click', async () => {
                     Guest: nome,
                     Cellphone: celular,
                     Guests: acompanhantes,
+                    Email: email,
                     AllGifts: allSelectedItems.join(', ')
                 }
             };
