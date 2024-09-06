@@ -11,8 +11,9 @@ body {
 }
 
 .finalMessage {
-    background-color: rgb(32, 32, 32, 0.4); /* Preto com 30% de transparência */
     display: none;
+    background-color: rgb(32, 32, 32, 0.4); /* Preto com 30% de transparência */
+   /* display: none;*/
     margin: 0;
     padding: 5%; 
     padding-left: 15%;
@@ -237,10 +238,23 @@ h3{
     }
 
     .finalMessage {
-        padding: 1rem; /* Padding de 20% em todos os lados */
-        width: 100%;
-     
         
+        padding: 1rem;
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        position: fixed; 
+        top: 0;
+        left: 0;
+        
+    }
+    
+
+    body{
+        margin: 0;
+        padding: 0;
     }
 
 
