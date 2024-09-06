@@ -8,8 +8,8 @@ let guestCellphone = '';
 // Função para buscar dados das tabelas
 async function get() {
     try {
-        await fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts?view=Grid%20view', 'data-table-gifts', idsSelecionadosGifts);
-        await fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos?view=Grid%20view', 'data-table-mimos', idsSelecionadosMimos);
+        await fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts?maxRecords=30&view=Grid%20view', 'data-table-gifts', idsSelecionadosGifts);
+        await fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos?maxRecords=30&view=Grid%20view', 'data-table-mimos', idsSelecionadosMimos);
     } catch (error) {
         showAlert(`Erro ao carregar dados: ${error.message}`, 'danger');
     }
