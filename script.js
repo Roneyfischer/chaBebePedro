@@ -8,8 +8,8 @@ let guestCellphone = '';
 // Função para buscar dados das tabelas
 async function get() {
     try {
-        await fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts?maxRecords=30&view=Grid%20view', 'data-table-gifts', idsSelecionadosGifts);
-        await fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos?maxRecords=30&view=Grid%20view', 'data-table-mimos', idsSelecionadosMimos);
+        await fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts?maxRecords=20&view=Grid%20view', 'data-table-gifts', idsSelecionadosGifts);
+        await fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos?maxRecords=20&view=Grid%20view', 'data-table-mimos', idsSelecionadosMimos);
     } catch (error) {
         showAlert(`Erro ao carregar dados: ${error.message}`, 'danger');
     }
@@ -194,8 +194,8 @@ document.getElementById('btnProximo').addEventListener('click', () => {
     document.getElementById('btnFinalizar').style.display = 'inline-block';
 
     // Carrega os presentes e mimos no modal
-    fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts?view=Grid%20view', 'modal-table-gifts', idsSelecionadosGifts);
-    fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos?view=Grid%20view', 'modal-table-mimos', idsSelecionadosMimos);
+    fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/gifts?maxRecords=20&view=Grid%20view', 'modal-table-gifts', idsSelecionadosGifts);
+    fetchData('https://api.airtable.com/v0/appLc4JSqHOsUIvnZ/mimos?maxRecords=20&view=Grid%20view', 'modal-table-mimos', idsSelecionadosMimos);
 });
 
 // Finalizar processo de seleção
@@ -282,3 +282,12 @@ document.getElementById('nome').addEventListener('input', checkFormValidity);
 document.getElementById('email').addEventListener('input', checkFormValidity);
 document.getElementById('celular').addEventListener('input', checkFormValidity);
 document.getElementById('acompanhantes').addEventListener('input', checkFormValidity);
+
+
+document.getElementById('btnFinalizar').addEventListener('click', function() {
+    // Fecha a modal (se não estiver usando automaticamente o Bootstrap para fechar)
+    $('#confirmacaoModal').modal('hide');
+
+    // Exibe a mensagem final
+    document.querySelector('.finalMessage').style.display = 'block';
+});
